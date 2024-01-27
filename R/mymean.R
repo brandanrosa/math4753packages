@@ -18,7 +18,7 @@
 #' \dontrun{mymean(x = rnorm(30), trim = 0.1, graph = "both)}
 
 mymean <- function(x, trim = 0, graph = "NULL"){
-  y <- na.omit(x)
+  y <- stats::na.omit(x)
   l <- length(y)
   trmy <- floor(trim * l)
   sy <- sort(y)
@@ -31,17 +31,17 @@ mymean <- function(x, trim = 0, graph = "NULL"){
   })
 
   myhist <- function(){
-    h <- hist(ssy, plot = FALSE)
+    h <- graphics::hist(ssy, plot = FALSE)
     r <- h$density/max(h$density)
-    hist(ssy,
-         col =  rgb(r,r^2,0),
+    graphics::hist(ssy,
+         col =  grDevices::rgb(r,r^2,0),
          main = paste("Trim =", trim),
          xlab = "Trimmed x")
   }
 
   mybox <- function(){
-    b <- boxplot(ssy, plot = FALSE)
-    boxplot(ssy,
+    b <- graphics::boxplot(ssy, plot = FALSE)
+    graphics::boxplot(ssy,
             col = "Blue",
             range = 3,
             main = paste("Trim =", trim),
@@ -50,7 +50,7 @@ mymean <- function(x, trim = 0, graph = "NULL"){
 
   switch(graph,
 
-         hist =  {
+         graphics::hist =  {
            myhist()
          },
 
@@ -58,7 +58,7 @@ mymean <- function(x, trim = 0, graph = "NULL"){
            mybox()
          },
          both = {# can you see a better way to code this?
-           layout(matrix(1:2, nrow = 1))
+           graphics::layout(matrix(1:2, nrow = 1))
            myhist()
            mybox()
          },
@@ -68,7 +68,7 @@ mymean <- function(x, trim = 0, graph = "NULL"){
   )
 
 # Would really like to make this conditional... filewrite = T/F... etc
-  write.csv(x = ssy,
+  utils::write.csv(x = ssy,
             file = paste0(Sys.Date(),"TRIMMEDx.csv"),
             row.names = FALSE)
 
