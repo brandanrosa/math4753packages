@@ -17,3 +17,20 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(math4753ROSAlive1)
 ```
+
+# Introduction
+
+Stuff
+
+## Take a look at my package
+
+```{r}
+x <- c(1,2,3,4,5)
+y <- c(9,8,7,6,5)
+
+plot(y ~ x, main = "My Huge Package", col = "darkgreen")
+
+l <- lm(y ~ x)
+abline(l, col = "gold")
+```
+
